@@ -1,41 +1,11 @@
-//async await is basically to handle responses
+// async / await using fetch
 
-const posts = [{title:'POST1'},{title:'POST2'}]
+async function fetchUsers(){
+    const response = await fetch('https://jsonplaceholder.typicode.com/users');
 
-function getPost(){
-    setTimeout(()=>{
-        let output = '';
-        posts.forEach((item,index)=>{
-            output += `${item.title}`+" ";
-        })
-        console.log(output);
-    },1000)
+    const data =  await response.json();
+     console.log(data);
+
 }
+fetchUsers();
 
-
-function createPost(post){
-    return  new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            posts.push(post);
-            const error = false;
-            if(!error){
-                resolve();
-            }
-            else{
-                reject("Error:Something went wrong")
-            }
-        },2000)
-    })  
-}
-
-
-
-async function start(){
-    await createPost({title:'POST3'});
-    getPost();
-}
-start();
-
-
-
-//aysnawait.js
