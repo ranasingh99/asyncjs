@@ -20,7 +20,7 @@ function createPost(post){
     return  new Promise((resolve,reject)=>{
         setTimeout(()=>{
             posts.push(post);
-            const error = false;
+            const error = true;
             if(!error){
                 resolve();
             }
@@ -31,6 +31,7 @@ function createPost(post){
     })  
 }
 createPost({title:'POST3'})
-.then(getPost);
-
+.then(getPost)
+.catch(err => console.log(err));
+// incase error occure
 
