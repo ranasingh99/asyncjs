@@ -31,5 +31,15 @@ function getPost(){
             output += `${item.title}`+" ";
         })
         console.log(output);
+    },1000)
+}
+
+function createPost(post){
+    setTimeout(()=>{
+        posts.push(post);
     },2000)
 }
+createPost({title:'POST3'});
+getPost();
+//note : here post3 will be not printted becoz createpost is taking longer than getpost 
+//so to resolve this we will use callback
