@@ -1,30 +1,3 @@
-/*let posts = [{title:'POST1'}];
-
-function createPost(){
-    return new Promise((resolve,reject)=>{
-        setTimeout(()=>{
-            posts.push({title:'POST2'});
-            resolve();
-        },1000)
-    })
-}
-function updateUserlastActivityTime(){
-    return new Promise((resolve,reject)=>{
-       setTimeout(()=>{
-        const updatedTime = new Date().getHours();
-        resolve();
-       })
-    })
-}
-
-Promise.all([createPost,updateUserlastActivityTime]).then((upadatedTime)=>{
-    console.log(upadatedTime);
-})
-*/
-
-//note : here post3 will be not printted becoz createpost is taking longer than getpost 
-//so to resolve this we will use callback
-//updated code will be :
 
 const posts = [{title:'POST1'},{title:'POST2'}]
 
@@ -37,13 +10,27 @@ function getPost(){
         console.log(output);
     },1000)
 }
+// but the continue use of callback will lead to two major 
+// problems 1)Callback of hell and 2)inersion of control , so two overcome we will use 
+// the Concept of promis . Basically using promis will only attch the function and not 
+// give the control of one function to other completely.
+//=======Use of Promises=============
 
-function createPost(post,callback){
-    setTimeout(()=>{
-        posts.push(post);
-        callback();
-    },2000)
+function createPost(post){
+    return  new Promise((resolve,reject)=>{
+        setTimeout(()=>{
+            posts.push(post);
+            const error = false;
+            if(!error){
+                resolve();
+            }
+            else{
+                reject("Error:Something went wrong")
+            }
+        },2000)
+    })  
 }
-createPost({title:'POST3'},getPost);
-// so this above code using callback resolved the problem
+createPost({title:'POST3'})
+.then(getPost);
+
 
