@@ -22,6 +22,10 @@ Promise.all([createPost,updateUserlastActivityTime]).then((upadatedTime)=>{
 })
 */
 
+//note : here post3 will be not printted becoz createpost is taking longer than getpost 
+//so to resolve this we will use callback
+//updated code will be :
+
 const posts = [{title:'POST1'},{title:'POST2'}]
 
 function getPost(){
@@ -34,12 +38,12 @@ function getPost(){
     },1000)
 }
 
-function createPost(post){
+function createPost(post,callback){
     setTimeout(()=>{
         posts.push(post);
+        callback();
     },2000)
 }
-createPost({title:'POST3'});
-getPost();
-//note : here post3 will be not printted becoz createpost is taking longer than getpost 
-//so to resolve this we will use callback
+createPost({title:'POST3'},getPost);
+// so this above code using callback resolved the problem
+
