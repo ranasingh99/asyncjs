@@ -78,6 +78,9 @@ async function preMovie(){
         setTimeout(()=>{resolve('Butter')},2000);
     })
 
+    const getColdDrinks = new Promise((resolve,reject)=>{
+        setTimeout(()=>{resolve('colddrink')},2000);
+    })
     const tickets = await promisWifebringingThetickets;
 
     console.log(`Wife: I got the ${tickets}`);
@@ -92,10 +95,15 @@ async function preMovie(){
     console.log('Wife: No i need some butter on popcorns');
 
      const butter  = await getButter;
+
+     
      console.log(`Husband : I got the ${butter}`);
      console.log('Anything else darling');
-     console.log('Wife: No we are gettig late');
-     console.log(`Husband: okay lets enjoy movie with ${popcorn} and ${butter}`)
+     console.log('Wife need colddrink')
+
+     const colddrink = await getColdDrinks;
+
+     console.log(`Husband: okay lets enjoy movie with ${popcorn} , ${butter} and ${colddrink}`)
      return tickets;
 }
 preMovie().then((tic)=>console.log(`Person 3: Shows the ${tic}`));
